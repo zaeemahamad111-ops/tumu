@@ -139,3 +139,42 @@
   border-radius: 9999px;
   font-weight: 800;
 }
+
+/* Responsive Grid Split Layouts */
+.grid-two-col {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+@media (min-width: 969px) {
+  .grid-find {
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+  }
+  .grid-franchise {
+    grid-template-columns: 1.1fr 1fr;
+    gap: 4rem;
+  }
+  .grid-contact {
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-container {
+    padding-top: 5.5rem;
+  }
+  .page-banner {
+    padding: 4rem 0 3rem;
+  }
+  .page-content {
+    padding: 3rem 0;
+  }
+  .page-form-card {
+    padding: 1.75rem;
+    border-radius: 16px;
+  }
+}

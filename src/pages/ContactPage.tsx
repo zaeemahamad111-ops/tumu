@@ -22,7 +22,7 @@ export function ContactPage() {
           <ArrowLeft size={16} /> BACK TO HOME
         </button>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '4rem', alignItems: 'start' }}>
+        <div className="grid-two-col grid-contact">
           
           {/* Left panel: Info */}
           <div>

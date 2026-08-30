@@ -22,7 +22,7 @@ export function FranchisePage() {
           <ArrowLeft size={16} /> BACK TO HOME
         </button>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: '4rem', alignItems: 'start' }}>
+        <div className="grid-two-col grid-franchise">
           
           {/* Left panel: Info & Benefits */}
           <div>

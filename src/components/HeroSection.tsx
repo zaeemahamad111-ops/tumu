@@ -5,33 +5,44 @@ import './HeroSection.css';
 
 const FRAME_COUNT = 120;
 
-// Preload desktop landscape frames
+// Globally store preloaded Image elements
 const desktopFrames: HTMLImageElement[] = [];
-// Preload mobile portrait frames
 const mobileFrames: HTMLImageElement[] = [];
 
-function preloadFrames() {
+// Track if sets have started loading
+let desktopLoaded = false;
+let mobileLoaded = false;
+
+function preloadDesktop() {
+  if (desktopLoaded) return;
+  desktopLoaded = true;
   for (let i = 1; i <= FRAME_COUNT; i++) {
     const num = String(i).padStart(4, '0');
-
-    // Desktop
-    const dImg = new Image();
-    dImg.src = `/frames/frame_${num}.jpg`;
-    desktopFrames[i - 1] = dImg;
-
-    // Mobile
-    const mImg = new Image();
-    mImg.src = `/mobile_frames/frame_${num}.jpg`;
-    mobileFrames[i - 1] = mImg;
+    const img = new Image();
+    img.src = `/frames/frame_${num}.jpg`;
+    desktopFrames[i - 1] = img;
   }
 }
-preloadFrames();
+
+function preloadMobile() {
+  if (mobileLoaded) return;
+  mobileLoaded = true;
+  for (let i = 1; i <= FRAME_COUNT; i++) {
+    const num = String(i).padStart(4, '0');
+    const img = new Image();
+    img.src = `/mobile_frames/frame_${num}.jpg`;
+    mobileFrames[i - 1] = img;
+  }
+}
 
 export function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const frameIndexRef = useRef(0);
   const rafRef = useRef<number | null>(null);
+
+  // Track which set of frames has finished initial preloading trigger
+  const [loadedSet, setLoadedSet] = useState<'none' | 'desktop' | 'mobile'>('none');
 
   // Scroll stage state
   const [scrollStage, setScrollStage] = useState(0);
@@ -49,6 +60,43 @@ export function HeroSection() {
     mass: 0.4,
     restDelta: 0.001
   });
+
+  // Lazy Preloading sequence (delays starting load to prioritize WelcomeLoader and main styles)
+  useEffect(() => {
+    const startPreloading = () => {
+      const isMobileViewport = window.innerWidth <= 768;
+      if (isMobileViewport) {
+        preloadMobile();
+        setLoadedSet('mobile');
+      } else {
+        preloadDesktop();
+        setLoadedSet('desktop');
+      }
+    };
+
+    const timer = setTimeout(startPreloading, 300);
+
+    const handleResize = () => {
+      const isMobileViewport = window.innerWidth <= 768;
+      if (isMobileViewport) {
+        if (!mobileLoaded) {
+          preloadMobile();
+          setLoadedSet('mobile');
+        }
+      } else {
+        if (!desktopLoaded) {
+          preloadDesktop();
+          setLoadedSet('desktop');
+        }
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   // Track scroll stage changes based on smooth progress
   useEffect(() => {
@@ -141,22 +189,26 @@ export function HeroSection() {
     };
   }, [smoothProgress, drawFrame]);
 
-  // Draw first frame + handle resize
+  // Handle canvas sizing resize events
   useEffect(() => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
+    return () => window.removeEventListener('resize', resizeCanvas);
+  }, [resizeCanvas]);
 
-    // Draw frame 0 once first image is loaded
+  // Draw frame 0 when preloading starts/completes
+  useEffect(() => {
+    if (loadedSet === 'none') return;
     const isMobileViewport = window.innerWidth <= 768;
     const firstImg = isMobileViewport ? mobileFrames[0] : desktopFrames[0];
-    if (firstImg.complete) {
-      drawFrame(0);
-    } else {
-      firstImg.onload = () => drawFrame(0);
+    if (firstImg) {
+      if (firstImg.complete) {
+        drawFrame(0);
+      } else {
+        firstImg.onload = () => drawFrame(0);
+      }
     }
-
-    return () => window.removeEventListener('resize', resizeCanvas);
-  }, [resizeCanvas, drawFrame]);
+  }, [loadedSet, drawFrame]);
 
   return (
     <div ref={sectionRef} className="hero-scroll-container">

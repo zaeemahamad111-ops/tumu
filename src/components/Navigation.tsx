@@ -8,13 +8,21 @@ export function Navigation() {
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    
+    // Auto-close mobile menu when navigating (including browser back/forward buttons)
+    const handleHashChange = () => setMenuOpen(false);
+    window.addEventListener('hashchange', handleHashChange);
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('hashchange', handleHashChange);
+    };
   }, []);
 
   return (
     <nav className={`navbar ${scrolled ? 'navbar--scrolled' : 'navbar--transparent'}`}>
       {/* Official TUMU logo */}
-      <a href="/" className="navbar-logo-wrap">
+      <a href="#/" className="navbar-logo-wrap" onClick={() => setMenuOpen(false)}>
         <img src="/logo.png" alt="TUMU Crisp & Cream" className="navbar-logo-img" />
       </a>
 

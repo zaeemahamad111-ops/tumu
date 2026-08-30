@@ -73,7 +73,7 @@ export function FindUsPage() {
           <ArrowLeft size={16} /> BACK TO HOME
         </button>
 
-        <div className="find-layout" style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '4rem', alignItems: 'start' }}>
+        <div className="grid-two-col grid-find">
           
           {/* Left panel: List & details */}
           <div className="find-stores-list">
