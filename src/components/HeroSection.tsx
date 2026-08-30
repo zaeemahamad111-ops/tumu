@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import './HeroSection.css';
 
@@ -47,22 +47,18 @@ export function HeroSection() {
   // Scroll stage state
   const [scrollStage, setScrollStage] = useState(0);
 
-  // Framer scroll tracking — 'end start' means progress reaches 1.0 exactly when the
-  // bottom of the scroll container aligns with the TOP of the viewport (i.e. just as the
-  // sticky section finishes its lock and starts scrolling away). This guarantees all 120
-  // frames play before the next section enters.
+  // 'start start' → 'end end' maps progress 0→1 exactly over the sticky scroll window.
+  // At progress=1.0 the sticky section unpins — all 120 frames will have played by then.
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start start', 'end start'],
+    offset: ['start start', 'end end'],
   });
 
-  // Smooth scroll progression using a spring (tuned to track scroll inputs instantly without mobile lag)
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 180,
-    damping: 35,
-    mass: 0.1,
-    restDelta: 0.001
-  });
+  // NO spring — drive frames from raw scroll progress so there is zero lag.
+  // The spring was the root cause: when scroll hit 1.0 and the section started to
+  // unpin, the spring was still animating 0.8→1.0, so the last frames played AFTER
+  // the sticky ended. Raw scrollYProgress matches the frame index to scroll perfectly.
+  const smoothProgress = scrollYProgress;
 
   // Lazy Preloading sequence (delays starting load to prioritize WelcomeLoader and main styles)
   useEffect(() => {
