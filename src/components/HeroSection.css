@@ -1,8 +1,9 @@
 /* ── Hero Scroll Container ── */
 .hero-scroll-container {
-  height: 220vh; /* Pinned duration is 120vh (220vh - 100vh) */
+  height: 250vh;
+  height: 250dvh; /* Dynamic viewport height for modern browsers */
   position: relative;
-  background-color: var(--color-cream); /* Match sticky container */
+  background-color: var(--color-cream);
 }
 
 /* ── Sticky Viewport ── */
@@ -10,6 +11,7 @@
   position: sticky;
   top: 0;
   height: 100vh;
+  height: 100dvh; /* Dynamic viewport height ensuring 100% exact mobile fit */
   width: 100%;
   overflow: hidden;
   display: flex;
@@ -112,7 +114,8 @@
 /* ── Responsive ── */
 @media (max-width: 768px) {
   .hero-scroll-container {
-    height: 200vh;
+    height: 220vh;
+    height: 220dvh;
   }
   .hero-dynamic-content {
     justify-content: center;

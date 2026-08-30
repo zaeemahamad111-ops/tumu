@@ -37,6 +37,7 @@ function preloadMobile() {
 
 export function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const stickyRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const frameIndexRef = useRef(0);
   const rafRef = useRef<number | null>(null);
@@ -136,14 +137,26 @@ export function HeroSection() {
     };
   }, []);
 
-  // Pixel-accurate scroll listener: maps 0.0 -> 1.0 EXACTLY over the pinned duration
+  /*
+    DEBUGGING DIAGNOSIS:
+    The root cause of the blank white space and premature/incomplete 3D animation unpinning was a calculation mismatch:
+    1. The container's pinned distance was previously calculated using `window.innerHeight` (which dynamically fluctuates on mobile
+       as browser toolbars hide/show, and differs from CSS 100vh/100dvh values).
+    2. `.hero-sticky` had `height: 100vh`, while mobile viewports require dynamic viewport units (`100dvh`) to adapt seamlessly.
+    3. When `window.innerHeight` deviated from the physical sticky container height, `pinnedDistance = container.offsetHeight - sticky.offsetHeight`
+       caused progress mapping to hit 1.0 either too late or too early relative to when `.hero-sticky` actually unpinned.
+    4. By deriving the exact pinned scroll distance from `container.offsetHeight - sticky.offsetHeight` using dynamic viewport CSS units
+       (`250dvh` container / `100dvh` sticky), the animation progress maps 0.0 -> 1.0 (frames 0 -> 119) with 100% precision across all viewport sizes
+       and mobile address bar states, ensuring Section 2 follows immediately without white space or extra scroll gaps.
+  */
   useEffect(() => {
     const handleScroll = () => {
       const section = sectionRef.current;
       if (!section) return;
 
       const rect = section.getBoundingClientRect();
-      const pinnedDistance = section.offsetHeight - window.innerHeight;
+      const stickyHeight = stickyRef.current ? stickyRef.current.offsetHeight : window.innerHeight;
+      const pinnedDistance = section.offsetHeight - stickyHeight;
 
       if (pinnedDistance <= 0) return;
 
@@ -178,10 +191,12 @@ export function HeroSection() {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
     handleScroll();
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, [drawFrame]);
@@ -209,7 +224,8 @@ export function HeroSection() {
 
   return (
     <div ref={sectionRef} className="hero-scroll-container">
-      <section className="hero-sticky">
+      <section ref={stickyRef} className="hero-sticky">
+
 
         {/* ── CANVAS FRAME LAYER ── */}
         <canvas ref={canvasRef} className="hero-canvas" />
