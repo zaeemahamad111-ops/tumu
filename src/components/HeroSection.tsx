@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { motion, useScroll, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import './HeroSection.css';
 
@@ -46,72 +46,6 @@ export function HeroSection() {
 
   // Scroll stage state
   const [scrollStage, setScrollStage] = useState(0);
-
-  // 'start start' → 'end end' maps progress 0→1 exactly over the sticky scroll window.
-  // At progress=1.0 the sticky section unpins — all 120 frames will have played by then.
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end end'],
-  });
-
-  // NO spring — drive frames from raw scroll progress so there is zero lag.
-  // The spring was the root cause: when scroll hit 1.0 and the section started to
-  // unpin, the spring was still animating 0.8→1.0, so the last frames played AFTER
-  // the sticky ended. Raw scrollYProgress matches the frame index to scroll perfectly.
-  const smoothProgress = scrollYProgress;
-
-  // Lazy Preloading sequence (delays starting load to prioritize WelcomeLoader and main styles)
-  useEffect(() => {
-    const startPreloading = () => {
-      const isMobileViewport = window.innerWidth <= 768;
-      if (isMobileViewport) {
-        preloadMobile();
-        setLoadedSet('mobile');
-      } else {
-        preloadDesktop();
-        setLoadedSet('desktop');
-      }
-    };
-
-    const timer = setTimeout(startPreloading, 300);
-
-    const handleResize = () => {
-      const isMobileViewport = window.innerWidth <= 768;
-      if (isMobileViewport) {
-        if (!mobileLoaded) {
-          preloadMobile();
-          setLoadedSet('mobile');
-        }
-      } else {
-        if (!desktopLoaded) {
-          preloadDesktop();
-          setLoadedSet('desktop');
-        }
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  // Track scroll stage changes based on smooth progress
-  useEffect(() => {
-    const unsubscribe = smoothProgress.on('change', (progress) => {
-      if (progress < 0.12) {
-        setScrollStage(0);
-      } else if (progress < 0.35) {
-        setScrollStage(1);
-      } else if (progress < 0.78) { // Visible from 35% to 78% of scroll (spans 43% total duration)
-        setScrollStage(2);
-      } else {
-        setScrollStage(3);
-      }
-    });
-    return () => unsubscribe();
-  }, [smoothProgress]);
 
   // Draw the canvas frame
   const drawFrame = useCallback((index: number) => {
@@ -165,28 +99,92 @@ export function HeroSection() {
     drawFrame(frameIndexRef.current);
   }, [drawFrame]);
 
-  // Subscribe to scroll and drive frames
+  // Lazy Preloading sequence (delays starting load to prioritize WelcomeLoader and main styles)
   useEffect(() => {
-    const unsubscribe = smoothProgress.on('change', (progress) => {
+    const startPreloading = () => {
+      const isMobileViewport = window.innerWidth <= 768;
+      if (isMobileViewport) {
+        preloadMobile();
+        setLoadedSet('mobile');
+      } else {
+        preloadDesktop();
+        setLoadedSet('desktop');
+      }
+    };
+
+    const timer = setTimeout(startPreloading, 300);
+
+    const handleResize = () => {
+      const isMobileViewport = window.innerWidth <= 768;
+      if (isMobileViewport) {
+        if (!mobileLoaded) {
+          preloadMobile();
+          setLoadedSet('mobile');
+        }
+      } else {
+        if (!desktopLoaded) {
+          preloadDesktop();
+          setLoadedSet('desktop');
+        }
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  // Pixel-accurate scroll listener: maps 0.0 -> 1.0 EXACTLY over the pinned duration
+  useEffect(() => {
+    const handleScroll = () => {
+      const section = sectionRef.current;
+      if (!section) return;
+
+      const rect = section.getBoundingClientRect();
+      const pinnedDistance = section.offsetHeight - window.innerHeight;
+
+      if (pinnedDistance <= 0) return;
+
+      // Calculate progress strictly bounded [0, 1] while pinned
+      const scrollOffset = -rect.top;
+      const progress = Math.max(0, Math.min(1, scrollOffset / pinnedDistance));
+
+      // Scroll stage state
+      if (progress < 0.12) {
+        setScrollStage(0);
+      } else if (progress < 0.35) {
+        setScrollStage(1);
+      } else if (progress < 0.78) {
+        setScrollStage(2);
+      } else {
+        setScrollStage(3);
+      }
+
+      // Map progress to frame 0 -> 119
       const targetIndex = Math.min(
         FRAME_COUNT - 1,
         Math.floor(progress * FRAME_COUNT)
       );
-      if (targetIndex === frameIndexRef.current) return;
-      frameIndexRef.current = targetIndex;
 
-      // Use rAF to batch paints
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      rafRef.current = requestAnimationFrame(() => {
-        drawFrame(targetIndex);
-      });
-    });
+      if (targetIndex !== frameIndexRef.current) {
+        frameIndexRef.current = targetIndex;
+        if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        rafRef.current = requestAnimationFrame(() => {
+          drawFrame(targetIndex);
+        });
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
 
     return () => {
-      unsubscribe();
+      window.removeEventListener('scroll', handleScroll);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [smoothProgress, drawFrame]);
+  }, [drawFrame]);
 
   // Handle canvas sizing resize events
   useEffect(() => {

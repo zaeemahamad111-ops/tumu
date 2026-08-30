@@ -1,8 +1,8 @@
 /* ── Hero Scroll Container ── */
 .hero-scroll-container {
-  height: 300vh; /* Set to 300vh for a smooth, high-fidelity scroll track */
+  height: 220vh; /* Pinned duration is 120vh (220vh - 100vh) */
   position: relative;
-  background-color: var(--color-cream); /* Match sticky container to prevent white body show-through during transitions */
+  background-color: var(--color-cream); /* Match sticky container */
 }
 
 /* ── Sticky Viewport ── */
@@ -111,6 +111,9 @@
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
+  .hero-scroll-container {
+    height: 200vh;
+  }
   .hero-dynamic-content {
     justify-content: center;
     padding: 0 1.5rem;
