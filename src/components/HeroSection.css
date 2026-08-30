@@ -18,6 +18,7 @@
   align-items: center;
   justify-content: flex-start;
   background: var(--color-cream);
+  z-index: 1;
 }
 
 /* ── Canvas Frame Layer ── */
