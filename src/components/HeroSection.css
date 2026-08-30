@@ -1,6 +1,6 @@
 /* ── Hero Scroll Container ── */
 .hero-scroll-container {
-  height: 160vh; /* Reduced from 400vh to 160vh to make the scroll animation play back faster and feel more responsive */
+  height: 200vh; /* Changed from 160vh to 200vh to give more scroll distance and ensure frames complete cleanly before unsticking */
   position: relative;
 }
 
