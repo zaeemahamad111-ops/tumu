@@ -47,10 +47,13 @@ export function HeroSection() {
   // Scroll stage state
   const [scrollStage, setScrollStage] = useState(0);
 
-  // Framer scroll tracking
+  // Framer scroll tracking — 'end start' means progress reaches 1.0 exactly when the
+  // bottom of the scroll container aligns with the TOP of the viewport (i.e. just as the
+  // sticky section finishes its lock and starts scrolling away). This guarantees all 120
+  // frames play before the next section enters.
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start start', 'end end'],
+    offset: ['start start', 'end start'],
   });
 
   // Smooth scroll progression using a spring (tuned to track scroll inputs instantly without mobile lag)
