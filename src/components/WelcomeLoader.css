@@ -1,0 +1,73 @@
+/* ── Welcome Loader Overlay ── */
+.welcome-loader-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--color-cream);
+  background-image: url('/japananese paper.png');
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: multiply;
+  z-index: 99999; /* Ensure it stays above everything, including navbar */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Subtle sakura design in loader */
+.welcome-loader-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/petals sakura bg less.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.welcome-loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 280px;
+  text-align: center;
+  z-index: 2;
+}
+
+/* Logo pulse */
+.welcome-loader-logo {
+  height: 80px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.05));
+}
+
+/* Loading Bar Track */
+.welcome-loader-bar-wrap {
+  width: 100%;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 99px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Loading Bar Fill (Pantone Gradient) */
+.welcome-loader-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-blue) 0%, var(--color-pink) 100%);
+  border-radius: 99px;
+  transition: width 0.1s linear; /* Smooth progress updates */
+}
+
+/* Elegant status text */
+.welcome-loader-text {
+  font-size: 0.7rem;
+  letter-spacing: 4px;
+  color: var(--color-black);
+  opacity: 0.4;
+  font-weight: 700;
+  text-transform: uppercase;
+}

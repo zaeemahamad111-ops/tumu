@@ -8,6 +8,7 @@ import { MomentsPage } from './pages/MomentsPage';
 import { FindUsPage } from './pages/FindUsPage';
 import { FranchisePage } from './pages/FranchisePage';
 import { ContactPage } from './pages/ContactPage';
+import { WelcomeLoader } from './components/WelcomeLoader';
 import './App.css';
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
 
   return (
     <>
+      <WelcomeLoader />
       <Navigation />
       <main>
         {renderContent()}
