@@ -53,11 +53,11 @@ export function HeroSection() {
     offset: ['start start', 'end end'],
   });
 
-  // Smooth scroll progression using a spring (tuned snappier to avoid lag before unsticking)
+  // Smooth scroll progression using a spring (tuned to track scroll inputs instantly without mobile lag)
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 110,
-    damping: 26,
-    mass: 0.3,
+    stiffness: 180,
+    damping: 35,
+    mass: 0.1,
     restDelta: 0.001
   });
 
