@@ -175,10 +175,13 @@ export function HeroSection() {
         setScrollStage(3);
       }
 
-      // Map progress to frame 0 -> 119
+      // Map progress (0.0 to 0.82) to frames 0 -> 119 so that 100% of animation frames complete
+      // BEFORE the sticky container unpins. The final frame 119 holds naturally for the remaining 18%
+      // of pinned scroll, ensuring a seamless, gap-free transition into Section 2.
+      const animationProgress = Math.min(1, progress / 0.82);
       const targetIndex = Math.min(
         FRAME_COUNT - 1,
-        Math.floor(progress * FRAME_COUNT)
+        Math.floor(animationProgress * FRAME_COUNT)
       );
 
       if (targetIndex !== frameIndexRef.current) {
