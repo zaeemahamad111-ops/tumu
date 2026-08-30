@@ -1,0 +1,21 @@
+/* Wave Divider */
+.wave-divider {
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  pointer-events: none;
+  margin: -2px 0;
+}
+
+.wave-divider img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  opacity: 0.55;
+}
+
+.wave-divider--flip img {
+  transform: scaleX(-1);
+}

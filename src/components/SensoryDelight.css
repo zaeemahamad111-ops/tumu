@@ -1,0 +1,222 @@
+.sensory-section {
+  overflow: hidden;
+  padding: 8rem 0;
+  background-color: var(--color-cream);
+  background-image: url('/japananese paper.png');
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: multiply;
+}
+
+.sensory-container {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 6rem;
+  align-items: center;
+}
+
+/* ── Content ── */
+.sensory-tag {
+  display: inline-block;
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-pink);
+  margin-bottom: 1.5rem;
+}
+
+.sensory-title {
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  line-height: 0.9;
+  margin-bottom: 2rem;
+}
+
+.sensory-copy {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.7;
+  color: #444;
+  margin-bottom: 2.5rem;
+}
+
+/* Stats bar */
+.sensory-stats {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  padding: 1.5rem;
+  background: var(--color-white);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+.stat { text-align: center; }
+.stat-num { font-size: 1.8rem; display: block; line-height: 1; }
+.stat-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #888; margin-top: 0.25rem; }
+
+.stat-divider {
+  width: 1px;
+  height: 40px;
+  background: var(--color-border);
+}
+
+/* Mascot labels */
+.mascot-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--color-white);
+  border-radius: 50px;
+  padding: 0.6rem 1.2rem 0.6rem 0.6rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.mascot-label strong {
+  display: block;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.mascot-label p {
+  font-size: 0.75rem;
+  color: #888;
+  margin: 0;
+}
+
+.mascot-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+/* ── Visual ── */
+.sensory-visual {
+  position: relative;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Dot pattern in background */
+.sensory-dots-bg {
+  position: absolute;
+  inset: -20px;
+  background-image: radial-gradient(rgba(232, 65, 108, 0.15) 2px, transparent 2px);
+  background-size: 24px 24px;
+  z-index: 0;
+  border-radius: 30px;
+}
+
+/* Product */
+.sensory-product-wrap {
+  position: relative;
+  z-index: 2;
+  width: 85%;
+}
+
+.sensory-product-image {
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow:
+    0 40px 80px rgba(0,0,0,0.18),
+    0 0 0 1px rgba(0,0,0,0.05);
+}
+
+.sensory-product-image img {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Floating crumbs */
+.crumb {
+  position: absolute;
+  border-radius: 50%;
+  animation: float-crumb 4s ease-in-out infinite;
+}
+.crumb-1 {
+  width: 18px; height: 18px;
+  background: var(--color-pink);
+  top: 10%; right: -15px;
+  animation-delay: 0s;
+}
+.crumb-2 {
+  width: 12px; height: 12px;
+  background: var(--color-blue);
+  bottom: 20%; left: -20px;
+  animation-delay: 1.2s;
+}
+.crumb-3 {
+  width: 8px; height: 8px;
+  background: var(--color-pink);
+  top: 50%; right: -30px;
+  animation-delay: 0.6s;
+}
+
+@keyframes float-crumb {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%       { transform: translateY(-14px) rotate(20deg); }
+}
+
+/* Mascot labels positioned */
+.mascot-label--pink {
+  position: absolute;
+  bottom: 40px;
+  right: -30px;
+  z-index: 10;
+}
+
+/* Stripe accent (top-left corner) */
+.sensory-stripe-accent {
+  position: absolute;
+  top: 0;
+  left: -20px;
+  width: 50px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.s-stripe { flex: 1; }
+.s-stripe.bg-blue { opacity: 0.5; }
+
+/* Floating flavour image */
+.sensory-flavour-float {
+  position: absolute;
+  bottom: -30px;
+  right: -50px;
+  width: 260px;
+  z-index: 7;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
+  animation: float-crumb 5s ease-in-out infinite;
+}
+.sensory-flavour-float img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .sensory-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .sensory-visual {
+    min-height: 400px;
+  }
+  .sensory-product-image img { height: 380px; }
+  .mascot-label--pink { right: 0; bottom: -20px; }
+}

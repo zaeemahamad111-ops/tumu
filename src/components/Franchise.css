@@ -1,0 +1,162 @@
+.franchise-section {
+  background-color: var(--color-pink);
+  padding: 8rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dot pattern overlay */
+.franchise-dot-bg {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.12) 2px, transparent 2px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Layout */
+.franchise-container {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+}
+
+/* ── Left ── */
+.franchise-content { color: white; }
+
+.franchise-eyebrow {
+  display: block;
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 1.25rem;
+}
+
+.franchise-title {
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  line-height: 0.88;
+  margin-bottom: 1.75rem;
+}
+
+.franchise-desc {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.8);
+  max-width: 420px;
+  margin-bottom: 2.5rem;
+}
+
+/* Stats */
+.franchise-stats {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(6px);
+  border-radius: 16px;
+  padding: 1.25rem 2rem;
+  margin-bottom: 2.5rem;
+  width: fit-content;
+}
+
+.fstat { text-align: center; }
+.fstat-num {
+  font-size: 2rem;
+  color: white;
+  display: block;
+  line-height: 1;
+}
+.fstat-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.6);
+  margin-top: 0.25rem;
+  display: block;
+}
+.fstat-divider {
+  width: 1px;
+  height: 36px;
+  background: rgba(255,255,255,0.25);
+}
+
+.btn-large {
+  padding: 1.2rem 2.5rem;
+  font-size: 1rem;
+}
+
+/* ── Right visual ── */
+.franchise-visual {
+  position: relative;
+}
+
+.franchise-img-frame {
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow:
+    0 40px 80px rgba(0,0,0,0.25),
+    0 0 0 2px rgba(255,255,255,0.2);
+  position: relative;
+}
+
+.franchise-img-frame img {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Floating NOW OPEN badge */
+.franchise-badge {
+  position: absolute;
+  top: 28px;
+  right: 28px;
+  background: white;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  text-align: center;
+  animation: badge-spin 12s linear infinite;
+}
+@keyframes badge-spin {
+  to { transform: rotate(360deg); }
+}
+.franchise-badge span {
+  line-height: 1.1;
+}
+
+/* Blue accent stripe behind the frame */
+.franchise-accent-stripe {
+  position: absolute;
+  bottom: -20px;
+  left: -20px;
+  width: 80%;
+  height: 60%;
+  background: var(--color-blue);
+  border-radius: 24px;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .franchise-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .franchise-desc { margin: 0 auto 2.5rem; }
+  .franchise-stats { margin: 0 auto 2.5rem; }
+  .franchise-accent-stripe { display: none; }
+  .franchise-img-frame img { height: 360px; }
+}

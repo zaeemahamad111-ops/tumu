@@ -1,0 +1,162 @@
+.find-section {
+  background-color: var(--color-blue);
+  position: relative;
+  overflow: hidden;
+  padding: 8rem 0;
+}
+
+/* Stripe background pattern */
+.find-stripe-bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  pointer-events: none;
+  z-index: 0;
+}
+.find-stripe-line {
+  flex: 1;
+  background: rgba(255,255,255,0);
+  transition: background 0.3s;
+}
+.find-stripe-line.opaque {
+  background: rgba(255,255,255,0.04);
+}
+
+/* ── Layout ── */
+.find-container {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 5rem;
+}
+
+/* ── Left ── */
+.find-eyebrow {
+  display: block;
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.find-title {
+  font-size: clamp(3rem, 6vw, 5rem);
+  line-height: 0.92;
+  margin-bottom: 1.5rem;
+}
+
+.find-desc {
+  color: rgba(255,255,255,0.7);
+  font-size: 1.05rem;
+  margin-bottom: 2.5rem;
+  max-width: 360px;
+  line-height: 1.6;
+}
+
+/* City pills */
+.find-city-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 2rem;
+}
+
+.find-city-pill {
+  background: rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.85);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 9999px;
+  padding: 0.35rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: default;
+  transition: background 0.3s, color 0.3s;
+}
+.find-city-pill:hover {
+  background: var(--color-pink);
+  border-color: var(--color-pink);
+  color: white;
+}
+
+/* ── India Map ── */
+.find-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.india-map-wrap {
+  position: relative;
+  width: 380px;
+  height: 460px;
+  flex-shrink: 0;
+}
+
+.india-svg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+
+/* Pin */
+.map-pin-wrap {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  cursor: pointer;
+}
+
+.pin-pulse {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(232, 65, 108, 0.35);
+  animation: pulse-ring 2.5s ease-out infinite;
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(0.5); opacity: 0.8; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.pin-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-pink);
+  border: 2px solid white;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.pin-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .find-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .find-desc { margin: 0 auto 2.5rem; }
+  .find-city-list { justify-content: center; }
+  .india-map-wrap { width: 260px; height: 320px; }
+}

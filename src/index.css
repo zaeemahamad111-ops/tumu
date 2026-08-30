@@ -1,0 +1,242 @@
+@font-face {
+  font-family: 'Konichiwa';
+  src: url('/Konichiwa.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ══════════════════════════════════════════════════════════
+   DESIGN TOKENS
+══════════════════════════════════════════════════════════ */
+:root {
+  /* Brand Colors */
+  --color-blue:   #418FDE;   /* Pantone 7688 C */
+  --color-pink:   #E8416C;   /* Pantone 198 C  */
+  --color-black:  #111111;
+  --color-white:  #ffffff;
+  --color-cream:  #FDFBF7;
+  --color-border: #EAEAEA;
+
+  /* Derived */
+  --color-blue-dark:  #3172b6;
+  --color-pink-dark:  #c9365c;
+  --color-blue-light: rgba(65,143,222,0.08);
+  --color-pink-light: rgba(232,65,108,0.08);
+
+  /* Typography */
+  --font-display: 'Konichiwa', 'Dela Gothic One', cursive;
+  --font-heading: 'Titan One', cursive;
+  --font-body:    'Open Sans', sans-serif;
+
+  /* Spacing */
+  --spacing-xs:  0.5rem;
+  --spacing-sm:  1rem;
+  --spacing-md:  2rem;
+  --spacing-lg:  4rem;
+  --spacing-xl:  8rem;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.10);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,0.14);
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-base: 0.3s ease;
+}
+
+/* ══════════════════════════════════════════════════════════
+   RESET & BASE
+══════════════════════════════════════════════════════════ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-black);
+  background-color: var(--color-white);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul { list-style: none; }
+
+/* ══════════════════════════════════════════════════════════
+   UTILITY CLASSES
+══════════════════════════════════════════════════════════ */
+
+/* Color */
+.text-blue  { color: var(--color-blue) !important; }
+.text-pink  { color: var(--color-pink) !important; }
+.text-white { color: var(--color-white) !important; }
+.text-black { color: var(--color-black) !important; }
+
+.bg-blue  { background-color: var(--color-blue); }
+.bg-pink  { background-color: var(--color-pink); }
+.bg-white { background-color: var(--color-white); }
+.bg-cream { background-color: var(--color-cream); }
+.bg-black { background-color: var(--color-black); }
+
+/* Typography */
+.font-display { font-family: var(--font-display); }
+.font-heading { font-family: var(--font-heading); }
+.font-body    { font-family: var(--font-body); }
+
+/* Layout */
+.container {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+.section {
+  padding: var(--spacing-xl) 0;
+  position: relative;
+}
+
+/* ══════════════════════════════════════════════════════════
+   BUTTONS
+══════════════════════════════════════════════════════════ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  border: none;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ripple on click */
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.2);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.btn:active::after { opacity: 1; }
+
+.btn-blue {
+  background-color: var(--color-blue);
+  color: var(--color-white);
+  box-shadow: 0 4px 14px rgba(65,143,222,0.35);
+}
+.btn-blue:hover {
+  background-color: var(--color-blue-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(65,143,222,0.4);
+}
+
+.btn-pink {
+  background-color: var(--color-pink);
+  color: var(--color-white);
+  box-shadow: 0 4px 14px rgba(232,65,108,0.35);
+}
+.btn-pink:hover {
+  background-color: var(--color-pink-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(232,65,108,0.4);
+}
+
+.btn-with-icon { display: inline-flex; align-items: center; gap: 0.6rem; }
+.btn-with-icon .icon-arrow { transition: transform 0.3s ease; }
+.btn-with-icon:hover .icon-arrow { transform: translateX(5px); }
+
+/* ══════════════════════════════════════════════════════════
+   GRAPHIC PATTERNS
+══════════════════════════════════════════════════════════ */
+.pattern-stripes {
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 12px,
+    rgba(65, 143, 222, 0.08) 12px,
+    rgba(65, 143, 222, 0.08) 24px
+  );
+}
+
+.pattern-dots {
+  background-image: radial-gradient(
+    rgba(232, 65, 108, 0.2) 2px,
+    transparent 2px
+  );
+  background-size: 22px 22px;
+}
+
+/* ══════════════════════════════════════════════════════════
+   GLOBAL SELECTION
+══════════════════════════════════════════════════════════ */
+::selection {
+  background-color: var(--color-pink);
+  color: white;
+}
+
+/* ══════════════════════════════════════════════════════════
+   SCROLL BAR
+══════════════════════════════════════════════════════════ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-cream); }
+::-webkit-scrollbar-thumb {
+  background: var(--color-blue);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-pink); }
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .container { padding: 0 var(--spacing-md); }
+}
+
+@media (max-width: 768px) {
+  .section { padding: var(--spacing-lg) 0; }
+  .container { padding: 0 var(--spacing-sm); }
+}

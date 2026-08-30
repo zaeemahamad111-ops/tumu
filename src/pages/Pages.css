@@ -1,0 +1,141 @@
+/* ── Page Layouts & Elements ── */
+
+.page-container {
+  padding-top: 7rem; /* Space for fixed capsule navbar */
+  min-height: 100vh;
+  background-color: var(--color-white);
+  box-sizing: border-box;
+}
+
+/* Page Header Banner */
+.page-banner {
+  padding: 6rem 0 4rem;
+  text-align: center;
+  background-color: var(--color-cream);
+  background-image: url('/japananese paper.png');
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: multiply;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Drifting sakura petals background for pages */
+.page-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/petals sakura bg less.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.page-banner-eyebrow {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--color-pink);
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+}
+
+.page-banner-title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.1;
+  color: var(--color-black);
+  margin: 0;
+}
+
+/* Back Link Button */
+.back-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-blue);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  margin-bottom: 2rem;
+  transition: transform 0.2s ease;
+}
+
+.back-link-btn:hover {
+  transform: translateX(-4px);
+}
+
+/* Page Content Body */
+.page-content {
+  padding: 5rem 0;
+}
+
+/* Grid configurations */
+.page-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+
+/* Form Styles */
+.page-form-card {
+  max-width: 600px;
+  margin: 0 auto;
+  background: var(--color-white);
+  padding: 3rem;
+  border-radius: 24px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--color-black);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.form-input, .form-textarea, .form-select {
+  width: 100%;
+  padding: 0.95rem 1.25rem;
+  border-radius: 12px;
+  border: 1.5px solid var(--color-border);
+  background: var(--color-cream);
+  outline: none;
+  font-size: 0.95rem;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+
+.form-input:focus, .form-textarea:focus, .form-select:focus {
+  border-color: var(--color-blue);
+}
+
+.form-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form-submit-btn {
+  width: 100%;
+  padding: 1.1rem;
+  font-size: 1rem;
+  justify-content: center;
+  border-radius: 9999px;
+  font-weight: 800;
+}

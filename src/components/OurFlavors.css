@@ -1,0 +1,211 @@
+.flavors-section {
+  overflow: hidden;
+  position: relative;
+  padding: 8rem 0;
+  background-image: url('/petals sakura bg less.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.flavors-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 3.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.flavors-eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-pink);
+  margin-bottom: 0.5rem;
+}
+
+.flavors-header h2 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+}
+
+.flavors-nav { display: flex; gap: 0.75rem; }
+
+.flavor-nav-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-border);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--color-black);
+}
+.flavor-nav-btn:hover {
+  border-color: var(--color-blue);
+  color: var(--color-blue);
+}
+.flavor-nav-btn--filled {
+  background: var(--color-blue);
+  border-color: var(--color-blue);
+  color: white;
+}
+.flavor-nav-btn--filled:hover {
+  background: #3172b6;
+  border-color: #3172b6;
+  color: white;
+}
+
+/* ── Scroll track ── */
+.flavors-scroll-container {
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 1rem var(--spacing-md) 5rem;
+  cursor: grab;
+  position: relative;
+  z-index: 1;
+}
+.flavors-scroll-container:active { cursor: grabbing; }
+.flavors-scroll-container::-webkit-scrollbar { display: none; }
+
+.flavors-track {
+  display: inline-flex;
+  gap: 2rem;
+  align-items: stretch;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Card ── */
+.flavor-card {
+  width: 310px;
+  flex-shrink: 0;
+  border-radius: 28px;
+  overflow: hidden;
+  position: relative;
+  background: var(--card-bg, #f9f9f9);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  transition: box-shadow 0.3s ease;
+  cursor: pointer;
+}
+.flavor-card:hover {
+  box-shadow: 0 20px 50px rgba(0,0,0,0.13);
+}
+
+/* subtle outline accent */
+.flavor-card-bg {
+  position: absolute;
+  inset: 0;
+  border: 2px solid transparent;
+  border-radius: 28px;
+  background: linear-gradient(var(--card-bg, #f9f9f9), var(--card-bg, #f9f9f9)) padding-box,
+              linear-gradient(135deg, var(--card-accent, #ccc) 0%, transparent 60%) border-box;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.flavor-card-inner {
+  position: relative;
+  z-index: 1;
+  padding: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.flavor-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flavor-id {
+  font-size: 1.5rem;
+  color: var(--card-accent, var(--color-pink));
+}
+
+.flavor-kanji {
+  font-size: 1.8rem;
+  opacity: 0.15;
+  font-weight: 900;
+  color: var(--card-accent, #000);
+}
+
+/* Visual area */
+.flavor-visual {
+  position: relative;
+  height: 260px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flavor-emoji {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-size: 2.5rem;
+  z-index: 2;
+}
+
+.flavor-product-img {
+  width: 100%;
+  height: 100%;
+}
+.flavor-product-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: multiply;
+  opacity: 0.85;
+  transition: transform 0.5s ease;
+}
+.flavor-card:hover .flavor-product-img img {
+  transform: scale(1.05);
+}
+
+/* Bottom */
+.flavor-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.flavor-name {
+  font-size: 1.5rem;
+  line-height: 1.1;
+  white-space: pre-line;
+  color: var(--color-black);
+}
+
+.flavor-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--card-accent, var(--color-blue));
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  white-space: nowrap;
+  transition: gap 0.3s;
+}
+.flavor-cta:hover { gap: 0.6rem; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .flavor-card { width: 260px; }
+  .flavor-visual { height: 200px; }
+}
