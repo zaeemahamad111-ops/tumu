@@ -2,10 +2,10 @@ import { motion } from 'framer-motion';
 import './TumuMoments.css';
 
 const GRID_ITEMS = [
-  { id: 1, label: 'INDULGENCE',  caption: 'Crisp outside, creamy inside',  size: 'large',    img: '/background.png'   },
-  { id: 2, label: 'BERRY BLISS', caption: 'Bursting with real fruit cream', size: 'medium',   img: '/flavour strawberry.png' },
-  { id: 3, label: 'BRAND',       caption: 'Crafted in Japan',               size: 'small-1',  img: '/logo background for design.png' },
-  { id: 4, label: 'VIBES',       caption: 'Flavour meets design',           size: 'small-2',  img: '/bg design.png'    },
+  { id: 1, label: 'INDULGENCE',  caption: 'Crisp outside, creamy inside',  size: 'large',    img: '/flavours/flavour-4.png'   },
+  { id: 2, label: 'BERRY BLISS', caption: 'Bursting with real fruit cream', size: 'medium',   img: '/flavours/flavour-5.png' },
+  { id: 3, label: 'BRAND',       caption: 'Crafted in Japan',               size: 'small-1',  img: '/flavours/flavour-6.png' },
+  { id: 4, label: 'VIBES',       caption: 'Flavour meets design',           size: 'small-2',  img: '/flavours/flavour-7.png'    },
 ];
 
 export function TumuMoments() {
