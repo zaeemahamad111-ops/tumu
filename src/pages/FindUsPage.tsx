@@ -145,13 +145,8 @@ export function FindUsPage() {
               xmlns="http://www.w3.org/2000/svg"
               style={{ width: '100%', height: 'auto', maxWidth: '350px' }}
             >
-              {/* Simplified India Map Outline */}
-              <path
-                d="M180,20 L260,30 L310,70 L340,100 L360,140 L370,180 L360,220 L370,260 L350,300 L310,340 L280,380 L250,420 L220,455 L200,480 L175,455 L150,420 L130,390 L100,350 L70,310 L50,270 L40,230 L50,190 L40,150 L60,110 L90,75 L130,45 Z"
-                fill="#ffffff"
-                stroke="#c3d5ef"
-                strokeWidth="2.5"
-              />
+              {/* Custom Map Image */}
+              <image href="/tumu-india-map.png" width="400" height="500" preserveAspectRatio="xMidYMid contain" />
 
               {/* Pin indicator lines and city markers */}
               {STORE_LOCATIONS.map((loc) => {
