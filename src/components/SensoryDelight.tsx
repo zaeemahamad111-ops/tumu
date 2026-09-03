@@ -71,8 +71,8 @@ export function SensoryDelight() {
             {/* Main hero visual: cream + sakura + crumbs */}
             <div className="sensory-product-image">
               <img
-                src="/background.png"
-                alt="TUMU — cream swirls, sakura petals and crispy bits"
+                src="/sensory-hero.png"
+                alt="TUMU — Crisp & Cream sensory delight experience"
               />
             </div>
 
