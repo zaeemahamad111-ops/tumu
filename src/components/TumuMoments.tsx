@@ -24,7 +24,7 @@ export function TumuMoments() {
             ✦ LIFESTYLE
           </motion.p>
           <motion.h2
-            className="moments-title font-heading"
+            className="moments-title font-display"
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
