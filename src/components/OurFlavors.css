@@ -105,7 +105,7 @@
   background: linear-gradient(var(--card-bg, #f9f9f9), var(--card-bg, #f9f9f9)) padding-box,
               linear-gradient(135deg, var(--card-accent, #ccc) 0%, transparent 60%) border-box;
   pointer-events: none;
-  z-index: 2;
+  z-index: 0;
 }
 
 .flavor-card-inner {
