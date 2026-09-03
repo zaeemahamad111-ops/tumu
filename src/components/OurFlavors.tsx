@@ -73,31 +73,26 @@ export function OurFlavors() {
               transition={{ delay: i * 0.05, duration: 0.6 }}
               whileHover={{ y: -8 }}
             >
-              <div className="flavor-card-bg" />
+              {/* Full-bleed background image */}
+              <div className="flavor-img-fill">
+                <img src={flavor.img} alt={flavor.name} loading="lazy" />
+              </div>
 
-              <div className="flavor-card-inner">
-                <div className="flavor-top">
-                  <span className="flavor-id font-display">{flavor.id}</span>
-                  <span className="flavor-kanji">{flavor.kanji}</span>
-                </div>
+              {/* Gradient scrims */}
+              <div className="flavor-scrim-top" />
+              <div className="flavor-scrim-bottom" />
 
-                <div className="flavor-visual">
-                  <div className="flavor-emoji">{flavor.emoji}</div>
-                  <div className="flavor-product-img">
-                    <img
-                      src={flavor.img}
-                      alt={flavor.name}
-                      loading="lazy"
-                    />
-                  </div>
-                </div>
+              {/* Overlay content */}
+              <div className="flavor-overlay-top">
+                <span className="flavor-id font-display">{flavor.id}</span>
+                <span className="flavor-kanji">{flavor.kanji}</span>
+              </div>
 
-                <div className="flavor-bottom">
-                  <h3 className="flavor-name font-heading">{flavor.name}</h3>
-                  <button className="flavor-cta">
-                    Explore <ArrowRight size={14} />
-                  </button>
-                </div>
+              <div className="flavor-overlay-bottom">
+                <h3 className="flavor-name font-heading">{flavor.name}</h3>
+                <button className="flavor-cta">
+                  Explore <ArrowRight size={14} />
+                </button>
               </div>
             </motion.div>
           ))}

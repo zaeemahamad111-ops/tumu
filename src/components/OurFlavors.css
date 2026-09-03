@@ -80,100 +80,91 @@
   z-index: 2;
 }
 
-/* ── Card ── */
+/* ── Card — full-bleed 9:16 ── */
 .flavor-card {
-  width: 310px;
+  width: 260px;
+  aspect-ratio: 9 / 16;
   flex-shrink: 0;
   border-radius: 28px;
   overflow: hidden;
   position: relative;
-  background: var(--card-bg, #f9f9f9);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-  transition: box-shadow 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
   cursor: pointer;
 }
 .flavor-card:hover {
-  box-shadow: 0 20px 50px rgba(0,0,0,0.13);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.22);
 }
 
-/* subtle outline accent */
-.flavor-card-bg {
+/* Full-bleed image fills entire card */
+.flavor-img-fill {
   position: absolute;
   inset: 0;
-  border: 2px solid transparent;
-  border-radius: 28px;
-  background: linear-gradient(var(--card-bg, #f9f9f9), var(--card-bg, #f9f9f9)) padding-box,
-              linear-gradient(135deg, var(--card-accent, #ccc) 0%, transparent 60%) border-box;
-  pointer-events: none;
   z-index: 0;
 }
-
-.flavor-card-inner {
-  position: relative;
-  z-index: 1;
-  padding: 2rem;
+.flavor-img-fill img {
+  width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.flavor-card:hover .flavor-img-fill img {
+  transform: scale(1.06);
 }
 
-.flavor-top {
+/* Gradient scrims for text legibility */
+.flavor-scrim-top {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to bottom,
+    rgba(0,0,0,0.45) 0%,
+    rgba(0,0,0,0) 38%);
+  pointer-events: none;
+}
+.flavor-scrim-bottom {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to top,
+    rgba(0,0,0,0.6) 0%,
+    rgba(0,0,0,0) 45%);
+  pointer-events: none;
+}
+
+/* Overlay: top (id + kanji) */
+.flavor-overlay-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 1.4rem 1.5rem 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .flavor-id {
-  font-size: 1.5rem;
-  color: var(--card-accent, var(--color-pink));
+  font-size: 1.3rem;
+  color: #fff;
+  opacity: 0.9;
 }
 
 .flavor-kanji {
-  font-size: 1.8rem;
-  opacity: 0.15;
+  font-size: 1.6rem;
   font-weight: 900;
-  color: var(--card-accent, #000);
+  color: rgba(255,255,255,0.5);
 }
 
-/* Visual area */
-.flavor-visual {
-  position: relative;
-  height: 260px;
-  border-radius: 16px;
-  overflow: hidden;
-  background: rgba(255,255,255,0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.flavor-emoji {
+/* Overlay: bottom (name + cta) */
+.flavor-overlay-bottom {
   position: absolute;
-  top: 12px;
-  right: 14px;
-  font-size: 2.5rem;
+  bottom: 0;
+  left: 0;
+  right: 0;
   z-index: 2;
-}
-
-.flavor-product-img {
-  width: 100%;
-  height: 100%;
-}
-.flavor-product-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  mix-blend-mode: multiply;
-  opacity: 0.85;
-  transition: transform 0.5s ease;
-}
-.flavor-card:hover .flavor-product-img img {
-  transform: scale(1.05);
-}
-
-/* Bottom */
-.flavor-bottom {
+  padding: 0 1.5rem 1.6rem;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -183,29 +174,33 @@
   font-size: 1.5rem;
   line-height: 1.1;
   white-space: pre-line;
-  color: var(--color-black);
+  color: #fff;
 }
 
 .flavor-cta {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: var(--card-accent, var(--color-blue));
-  background: none;
-  border: none;
+  color: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.35);
+  backdrop-filter: blur(6px);
+  border-radius: 999px;
   cursor: pointer;
-  padding: 0;
+  padding: 0.35rem 0.9rem;
   white-space: nowrap;
-  transition: gap 0.3s;
+  transition: gap 0.3s, background 0.3s;
 }
-.flavor-cta:hover { gap: 0.6rem; }
+.flavor-cta:hover {
+  gap: 0.6rem;
+  background: rgba(255,255,255,0.28);
+}
 
 /* Responsive */
 @media (max-width: 768px) {
-  .flavor-card { width: 260px; }
-  .flavor-visual { height: 200px; }
+  .flavor-card { width: 210px; }
 }
