@@ -4,14 +4,14 @@ import { motion } from 'framer-motion';
 import './OurFlavors.css';
 
 const FLAVORS = [
-  { id: '01', name: 'MATCHA',        kanji: '抹茶',  bg: '#e8f0dc', accent: '#5a8a3c', emoji: '🍵', img: '/flavours/flavour-1.png' },
-  { id: '02', name: 'STRAWBERRY',    kanji: '苺',    bg: '#fce8ec', accent: '#d44060', emoji: '🍓', img: '/flavours/flavour-2.png' },
-  { id: '03', name: 'CHOCOLATE',     kanji: 'チョコ', bg: '#ede0d4', accent: '#5c3a1e', emoji: '🍫', img: '/flavours/flavour-3.png' },
-  { id: '04', name: 'VANILLA',       kanji: 'バニラ', bg: '#fdf6e3', accent: '#c49a3c', emoji: '🤍', img: '/flavours/flavour-4.png' },
-  { id: '05', name: 'CARAMEL',       kanji: 'キャラメル', bg: '#f5e6cc', accent: '#9a5e18', emoji: '🍯', img: '/flavours/flavour-5.png' },
-  { id: '06', name: 'COOKIES &\nCREAM', kanji: 'クッキー', bg: '#e8e8e8', accent: '#222', emoji: '🍪', img: '/flavours/flavour-6.png' },
-  { id: '07', name: 'YUZU',          kanji: '柚子',  bg: '#fdf7d4', accent: '#c9a600', emoji: '🍋', img: '/flavours/flavour-7.png' },
-  { id: '08', name: 'MANGO',         kanji: 'マンゴー', bg: '#fff0cc', accent: '#e69900', emoji: '🥭', img: '/flavours/flavour-8.png' },
+  { id: '01', name: 'MATCHA',        kanji: '抹茶',  bg: '#e8f0dc', accent: '#5a8a3c', img: '/flavours/flavour-1.png' },
+  { id: '02', name: 'STRAWBERRY',    kanji: '苺',    bg: '#fce8ec', accent: '#d44060', img: '/flavours/flavour-2.png' },
+  { id: '03', name: 'CHOCOLATE',     kanji: 'チョコ', bg: '#ede0d4', accent: '#5c3a1e', img: '/flavours/flavour-3.png' },
+  { id: '04', name: 'VANILLA',       kanji: 'バニラ', bg: '#fdf6e3', accent: '#c49a3c', img: '/flavours/flavour-4.png' },
+  { id: '05', name: 'CARAMEL',       kanji: 'キャラメル', bg: '#f5e6cc', accent: '#9a5e18', img: '/flavours/flavour-5.png' },
+  { id: '06', name: 'COOKIES &\nCREAM', kanji: 'クッキー', bg: '#e8e8e8', accent: '#222', img: '/flavours/flavour-6.png' },
+  { id: '07', name: 'YUZU',          kanji: '柚子',  bg: '#fdf7d4', accent: '#c9a600', img: '/flavours/flavour-7.png' },
+  { id: '08', name: 'MANGO',         kanji: 'マンゴー', bg: '#fff0cc', accent: '#e69900', img: '/flavours/flavour-8.png' },
 ];
 
 export function OurFlavors() {
@@ -89,9 +89,6 @@ export function OurFlavors() {
                 <span className="flavor-id font-display">{flavor.id}</span>
                 <span className="flavor-kanji">{flavor.kanji}</span>
               </div>
-
-              {/* Emoji */}
-              <div className="flavor-emoji">{flavor.emoji}</div>
 
               {/* Bottom: name + cta */}
               <div className="flavor-bottom">
