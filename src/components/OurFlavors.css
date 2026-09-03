@@ -80,7 +80,7 @@
   z-index: 2;
 }
 
-/* ── Card — full-bleed 9:16 ── */
+/* ── Card — full 9:16 bleed ── */
 .flavor-card {
   width: 260px;
   aspect-ratio: 9 / 16;
@@ -88,90 +88,90 @@
   border-radius: 28px;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
   transition: box-shadow 0.3s ease, transform 0.3s ease;
   cursor: pointer;
 }
 .flavor-card:hover {
-  box-shadow: 0 24px 60px rgba(0,0,0,0.22);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.25);
 }
 
-/* Full-bleed image fills entire card */
-.flavor-img-fill {
+/* Full-bleed image */
+.flavor-card-img {
   position: absolute;
   inset: 0;
-  z-index: 0;
-}
-.flavor-img-fill img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.6s ease;
 }
-.flavor-card:hover .flavor-img-fill img {
+.flavor-card:hover .flavor-card-img {
   transform: scale(1.06);
 }
 
-/* Gradient scrims for text legibility */
-.flavor-scrim-top {
+/* Gradient overlay: dark at top and bottom, clear in middle */
+.flavor-card-overlay {
   position: absolute;
   inset: 0;
-  z-index: 1;
-  background: linear-gradient(to bottom,
+  background: linear-gradient(
+    to bottom,
     rgba(0,0,0,0.45) 0%,
-    rgba(0,0,0,0) 38%);
-  pointer-events: none;
-}
-.flavor-scrim-bottom {
-  position: absolute;
-  inset: 0;
+    rgba(0,0,0,0.0) 35%,
+    rgba(0,0,0,0.0) 55%,
+    rgba(0,0,0,0.65) 100%
+  );
   z-index: 1;
-  background: linear-gradient(to top,
-    rgba(0,0,0,0.6) 0%,
-    rgba(0,0,0,0) 45%);
-  pointer-events: none;
 }
 
-/* Overlay: top (id + kanji) */
-.flavor-overlay-top {
+/* Top row */
+.flavor-card-top {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 2;
-  padding: 1.4rem 1.5rem 0;
+  top: 1.4rem;
+  left: 1.4rem;
+  right: 1.4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 2;
 }
 
 .flavor-id {
   font-size: 1.3rem;
-  color: #fff;
-  opacity: 0.9;
+  color: rgba(255,255,255,0.9);
 }
 
 .flavor-kanji {
   font-size: 1.6rem;
+  opacity: 0.6;
   font-weight: 900;
-  color: rgba(255,255,255,0.5);
+  color: #fff;
 }
 
-/* Overlay: bottom (name + cta) */
-.flavor-overlay-bottom {
+/* Emoji — center of card */
+.flavor-emoji {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3.5rem;
   z-index: 2;
-  padding: 0 1.5rem 1.6rem;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+}
+
+/* Bottom */
+.flavor-bottom {
+  position: absolute;
+  bottom: 1.4rem;
+  left: 1.4rem;
+  right: 1.4rem;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  z-index: 2;
 }
 
 .flavor-name {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   line-height: 1.1;
   white-space: pre-line;
   color: #fff;
@@ -181,26 +181,22 @@
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: rgba(255,255,255,0.85);
-  background: rgba(255,255,255,0.18);
-  border: 1px solid rgba(255,255,255,0.35);
-  backdrop-filter: blur(6px);
-  border-radius: 999px;
+  background: none;
+  border: none;
   cursor: pointer;
-  padding: 0.35rem 0.9rem;
+  padding: 0;
   white-space: nowrap;
-  transition: gap 0.3s, background 0.3s;
+  transition: gap 0.3s;
 }
-.flavor-cta:hover {
-  gap: 0.6rem;
-  background: rgba(255,255,255,0.28);
-}
+.flavor-cta:hover { gap: 0.6rem; color: #fff; }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .flavor-card { width: 210px; }
+  .flavor-card { width: 200px; }
+  .flavor-emoji { font-size: 2.8rem; }
 }

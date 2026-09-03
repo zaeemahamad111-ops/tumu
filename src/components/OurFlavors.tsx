@@ -73,22 +73,28 @@ export function OurFlavors() {
               transition={{ delay: i * 0.05, duration: 0.6 }}
               whileHover={{ y: -8 }}
             >
-              {/* Full-bleed background image */}
-              <div className="flavor-img-fill">
-                <img src={flavor.img} alt={flavor.name} loading="lazy" />
-              </div>
+              {/* Full bleed image */}
+              <img
+                className="flavor-card-img"
+                src={flavor.img}
+                alt={flavor.name}
+                loading="lazy"
+              />
 
-              {/* Gradient scrims */}
-              <div className="flavor-scrim-top" />
-              <div className="flavor-scrim-bottom" />
+              {/* Gradient overlay */}
+              <div className="flavor-card-overlay" />
 
-              {/* Overlay content */}
-              <div className="flavor-overlay-top">
+              {/* Top row: id + kanji */}
+              <div className="flavor-card-top">
                 <span className="flavor-id font-display">{flavor.id}</span>
                 <span className="flavor-kanji">{flavor.kanji}</span>
               </div>
 
-              <div className="flavor-overlay-bottom">
+              {/* Emoji */}
+              <div className="flavor-emoji">{flavor.emoji}</div>
+
+              {/* Bottom: name + cta */}
+              <div className="flavor-bottom">
                 <h3 className="flavor-name font-heading">{flavor.name}</h3>
                 <button className="flavor-cta">
                   Explore <ArrowRight size={14} />
